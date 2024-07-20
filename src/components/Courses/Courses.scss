@@ -1,0 +1,76 @@
+.cfh-courses-section {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+  
+	.cfh-courses-container {
+	  border: 1px solid #808080;
+	  height: 90%;
+	  width: 90%;
+	  margin: 20px;
+	  border-radius: 10px;
+	  overflow: hidden;
+  
+	  .cfh-courses-header {
+		position: sticky;
+		top: 0;
+		border-bottom: 1px solid #808080;
+		padding: 10px;
+		background-color: white;
+		z-index: 1;
+		width: 100%;
+	  }
+  
+	  .cfh-courses-cards-container {
+		height: calc(100% - 60px);
+		overflow-y: auto;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+  
+		.cfh-card-container {
+		  margin: 5px;
+  
+		  .cfh-rbs-card {
+			.courses-info {
+			  display: -webkit-box;
+			  -webkit-line-clamp: 3; /* Number of lines to display before truncating */
+			  line-clamp: 3;
+			  -webkit-box-orient: vertical;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			}
+  
+			.cfh-hover-icons {
+			  display: none !important; /* Hide icons initially */
+			}
+  
+			&:hover .cfh-hover-icons {
+			  display: flex !important; /* Show icons on hover */
+			}
+		  }
+		}
+	  }
+	}
+  }
+  
+  .cfh-share-options-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+  
+	.cfh-share-to-icon {
+	  background-color: #f0f0f0;
+	  border: none;
+	  padding: 10px;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+  
+	  &:hover {
+		background-color: #e0e0e0;
+	  }
+	}
+  }
+  

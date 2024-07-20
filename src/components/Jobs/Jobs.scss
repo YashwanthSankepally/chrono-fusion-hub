@@ -1,0 +1,104 @@
+.cfh-jobs-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    // margin-top: 65px;
+  
+    .cfh-jobs-container {
+      height: calc(100vh - 40px); // Adjust this based on your header height
+      width: 100%;
+      max-width: 1200px;
+      border: 1px solid #808080;
+      border-radius: 8px;
+      overflow: hidden; // Ensure no overflow outside the container
+  
+      .cfh-jobs-header {
+        display: flex;
+        border-bottom: 1px solid #808080;
+        padding: 5px;
+        position: sticky;
+        top: 0; // Make sure it sticks to the top
+        background-color: #fff; // To avoid overlay issues
+  
+        .cfh-input-container {
+          display: flex;
+          position: relative;
+          flex-grow: 1;
+          max-width: 300px;
+  
+          input {
+            width: 100%;
+            padding-right: 2.5rem;
+            box-sizing: border-box;
+            outline: none !important;
+              
+            &:focus-visible, &:focus-within {
+                border: 2px solid #000000;
+            }
+          }
+  
+          span {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #999;
+          }
+        }
+  
+        .cfh-header-btns {
+          display: flex;
+          margin-left: auto;
+        }
+      }
+  
+      .cfh-jobs-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1px;
+        justify-content: center;
+        flex-grow: 1; // Allow it to take remaining space
+        height: 100%;
+        overflow-y: auto; // Allow scrolling if needed
+  
+        .cfh-job-card-container {
+          .cfh-job-card {
+            .cfh-buttons-container {
+              .cfh-hover-icons {
+                display: none !important;
+              }
+            }
+  
+            &:hover,
+            &:focus-within,
+            &:focus-visible {
+              .cfh-hover-icons {
+                display: flex !important;
+              }
+            }
+  
+            .cfh-about-job {
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              line-clamp: 3;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .cfh-job-modal {
+    max-width: 80%;
+  
+    .cfh-modal-body {
+      max-height: 50vh; // Set a maximum height to allow scrolling within the modal
+      overflow-y: auto;
+    }
+  }
+  

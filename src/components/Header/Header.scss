@@ -1,0 +1,61 @@
+/* Header.scss */
+
+.cfh-navbar {
+    background-color: #ffffff;
+  
+    .cfh-logo-container {
+      display: flex;
+      align-items: center; // Ensure items are centered along the cross axis
+  
+      .cfh-logo {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        margin-right: 0.5rem; // Add some space between the image and the title
+      }
+  
+      .cfh-title {
+        font-size: 18px;
+        margin: 0; // Remove any default margin
+      }
+    }
+  
+    .form-control {
+      margin-right: 0.5rem;
+    }
+  
+    .btn-outline-success {
+      color: #28a745;
+      border-color: #28a745;
+      &:hover {
+        background-color: #28a745;
+        color: #fff;
+      }
+    }
+  }
+  
+  .cfh-offcanvas {
+    width: 340px !important;
+    .offcanvas-header {
+      border-bottom: 1px solid #dee2e6;
+    }
+    .offcanvas-body {
+      padding: 1rem;
+
+      .cfh-profile-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+
+        .cfh-profile-img {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  

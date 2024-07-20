@@ -1,0 +1,162 @@
+/* App.scss */
+
+/* Reset default margin and other user agent styles for the body element */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f0f2f5;
+  transition: background-color 0.3s, color 0.3s;
+  overflow: auto;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+
+  .cfh-page-not-found {
+    
+    &:hover {
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  .nav-link, h1, p, .btn {
+    color: #ffffff !important;
+  }
+  
+  body, section {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  div {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+  }
+
+  .dropdown-toggle {
+    &:focus-visible {
+      border: 1px solid #eeeeee;
+    }
+  }
+
+  .dropdown-menu {
+    border: 1px solid #eeeeee;
+
+    .dropdown-item {
+      color: #ffffff;
+
+      &:hover, &:focus-visible {
+        color: #000000;
+      }
+    }
+  }
+
+  .cfh-jobs-header-icon, .MuiSvgIcon-root {
+    color: #ffffff !important;
+
+    &::placeholder {
+      color: #ffffff;
+    }
+  }
+
+  .MuiInputBase-input, .MuiPaper-root, .MuiPaper-elevation, .MuiPaper-rounded, .MuiPaper-elevation1, input {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  .list-group-item, .list-group-item-action {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+  }
+
+  .card {
+    border: 1px solid #ffffff;
+  }
+
+  .svg-inline--fa {
+    color: #ffffff;
+  }
+
+  .cfh-share-to-icon {
+    background-color: #121212 !important;
+    svg {
+      color: #ffffff;
+    }
+  }
+
+  .cfh-home-section {
+    .card-container {
+      .card {
+        .card-image {
+          &:hover {
+            box-shadow: 
+            0 0 5px 2px #2196F3, /* Blue shadow with consistent blur and spread */
+            0 0 5px 2px #FFFFFF; /* White shadow with consistent blur and spread */
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+.cfh-navbar {
+  &.navbar-light {
+    background-color: #ffffff;
+  }
+
+  &.navbar-dark {
+    background-color: #333333;
+  }
+}
+
+/* Additional global styles */
+* {
+  box-sizing: inherit;
+}
+
+/* Webkit (Chrome, Safari, etc.) scrollbar */
+/* Track */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Custom styles to override user agent styles for modal */
+.cfh-job-modal .modal-body {
+  display: flex !important;
+  flex-direction: column;
+  unicode-bidi: isolate !important;
+  height: 50% !important;
+  overflow-y: auto !important;
+}
+
+.cfh-job-modal {
+  max-width: 80% !important;
+}
+
+.cfh-g-cp {
+  cursor: pointer;
+}
+
+/* Dark mode styles */
+.dark-mode .cfh-navbar {
+  background-color: #333;
+}
+
+.dark-mode .cfh-profile-container {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}

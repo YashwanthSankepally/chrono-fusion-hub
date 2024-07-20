@@ -1,0 +1,28 @@
+// PageNotFound.scss
+
+.page-not-found {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #333; /* Example color */
+    }
+  
+    p {
+      font-size: 1.5rem;
+      color: #666; /* Example color */
+      text-align: center;
+    }
+
+    .cfh-page-not-found {
+      border-radius: 10px;
+      cursor: no-drop;
+      box-shadow: 10px 20px 20px #000000;
+    }
+  }
+  
