@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "../Header/Header";
 import "./Home.scss";
 import jobsThumbnail from "../../assets/apps-images/jobs-app-removebg-preview.png";
@@ -5,34 +6,48 @@ import coursesThumbnail from "../../assets/apps-images/courses2app.png";
 import shopThumbnail from "../../assets/apps-images/shop2app.png";
 import todoThumbnail from "../../assets/svg/svg-app-images/todoApp.svg";
 import clockAndCalendarMP4 from "../../assets/animatedImages/calendarClockAnimated-unscreen.gif";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import weatherVideoGif from "../../assets/animatedImages/weather.gif";
+import RecipeImage from "../../assets/apps-images/recipe.bg.png";
+import NewsAnimation from "../../assets/animatedImages/NewsAnimation.gif";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const cardsArray = [
     {
       cardTitle: "Jobs",
-      CardImg: jobsThumbnail,
+      CardImage: jobsThumbnail,
     },
     {
       cardTitle: "Courses",
-      CardImg: coursesThumbnail,
+      CardImage: coursesThumbnail,
     },
     {
       cardTitle: "Shop",
-      CardImg: shopThumbnail,
+      CardImage: shopThumbnail,
     },
     {
       cardTitle: "Todo",
-      CardImg: todoThumbnail,
+      CardImage: todoThumbnail,
     },
     {
       cardTitle: "Clock & Calendar",
-      CardImg: clockAndCalendarMP4
-    }
+      CardImage: clockAndCalendarMP4,
+    },
+    {
+      cardTitle: "Weather",
+      CardImage: weatherVideoGif,
+    },
+    {
+      cardTitle: "Recipe Book",
+      CardImage: RecipeImage,
+    },
+    {
+      cardTitle: "News",
+      CardImage: NewsAnimation,
+    },
   ];
 
   const handleNavigate = (cardTitle) => {
@@ -46,6 +61,12 @@ const Home = () => {
       case "Shop":
         navigate("/cfh-shop");
         break;
+      case "Clock & Calendar":
+        navigate("/calendar");
+        break;
+      case "Todo":
+        navigate("/todo");
+        break;
       default:
         navigate("/page-not-found");
         break;
@@ -58,12 +79,23 @@ const Home = () => {
     }
   };
 
+  const filteredCards = cardsArray.filter((card) =>
+    card.cardTitle.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <Header />
       <section className="cfh-home-section">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input d-none"
+        />
         <div className="cfh-cards-container">
-          {cardsArray.map((card, index) => (
+          {filteredCards.map((card, index) => (
             <div
               className="card-container"
               key={index}
@@ -75,15 +107,12 @@ const Home = () => {
                 onKeyDown={(event) => handleKeyDown(event, card.cardTitle)}
               >
                 <img
-                  src={card.CardImg}
+                  src={card.CardImage}
                   alt={card.cardTitle}
                   className="card-image"
                   tabIndex={0}
                 />
-                <div
-                  className="card-title"
-                  tabIndex={0}
-                >
+                <div className="card-title" tabIndex={0}>
                   {card.cardTitle}
                 </div>
               </div>

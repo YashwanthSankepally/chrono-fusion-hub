@@ -92,8 +92,9 @@ body {
         .card-image {
           &:hover {
             box-shadow: 
-            0 0 5px 2px #2196F3, /* Blue shadow with consistent blur and spread */
-            0 0 5px 2px #FFFFFF; /* White shadow with consistent blur and spread */
+            0 0 5px 2px #2196F3,
+            0 0 5px 2px #FFFFFF;
+            filter: drop-shadow(0 0 2em #646cffaa);
           }
         }
       }

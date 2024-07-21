@@ -62,9 +62,7 @@ const Jobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get(
-          "https://mp8742d88b0a5eee8eb2.free.beeceptor.com/jobs"
-        );
+        const response = await axios.get("http://localhost:5000/jobs");
         // Simulate delay for demo purposes
         setTimeout(() => {
           setJobs(response.data);
@@ -120,12 +118,9 @@ const Jobs = () => {
 
   const handleApply = async (jobId) => {
     try {
-      const response = await axios.post(
-        "https://mp8742d88b0a5eee8eb2.free.beeceptor.com/jobs/apply",
-        {
-          jobId,
-        }
-      );
+      const response = await axios.post("http://localhost:5000/jobs/apply", {
+        jobId,
+      });
 
       if (response.status === 200) {
         console.log("Job applied successfully");
@@ -217,18 +212,47 @@ const Jobs = () => {
             {loading
               ? // Display skeleton loaders while loading
                 Array.from({ length: 5 }).map((_, index) => (
-                  <div key={index} className="cfh-job-card-container">
+                  <div
+                    key={`skeleton-${index}`} // Unique key for the outer div
+                    className="cfh-job-card-container"
+                  >
                     <Card
                       style={{ width: "18rem" }}
                       className="cfh-job-card m-1"
                     >
-                      <Skeleton variant="text" width="70%" animation="wave" />
-                      <Skeleton variant="text" width="50%" animation="wave"/>
+                      <Skeleton
+                        variant="text"
+                        width="70%"
+                        animation="wave"
+                        key={`skeleton-title-${index}`}
+                      />
+                      <Skeleton
+                        variant="text"
+                        width="50%"
+                        animation="wave"
+                        key={`skeleton-subtitle-${index}`}
+                      />
                       <Card.Body>
-                        <Skeleton variant="text" animation="wave"/>
-                        <Skeleton variant="text" animation="wave"/>
-                        <Skeleton variant="text" animation="wave"/>
-                        <Skeleton variant="text" animation="wave"/>
+                        <Skeleton
+                          variant="text"
+                          animation="wave"
+                          key={`skeleton-text-1-${index}`}
+                        />
+                        <Skeleton
+                          variant="text"
+                          animation="wave"
+                          key={`skeleton-text-2-${index}`}
+                        />
+                        <Skeleton
+                          variant="text"
+                          animation="wave"
+                          key={`skeleton-text-3-${index}`}
+                        />
+                        <Skeleton
+                          variant="text"
+                          animation="wave"
+                          key={`skeleton-text-4-${index}`}
+                        />
                         <div className="d-flex">
                           <Skeleton
                             variant="button"
@@ -236,6 +260,7 @@ const Jobs = () => {
                             className="m-1"
                             width={70}
                             animation="wave"
+                            key={`skeleton-button-1-${index}`}
                           />
                           <Skeleton
                             variant="button"
@@ -243,6 +268,7 @@ const Jobs = () => {
                             className="m-1"
                             width={70}
                             animation="wave"
+                            key={`skeleton-button-2-${index}`}
                           />
                         </div>
                       </Card.Body>

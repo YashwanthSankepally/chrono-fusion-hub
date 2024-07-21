@@ -1,0 +1,234 @@
+/* Analog Clock Style */
+.container {
+  position: relative;
+  background: #2f363e;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%; /* Ensure container takes full width */
+
+  .cfh-marquee-text {
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+  }
+}
+
+.clock {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  background: #2f363e;
+  border-radius: 50%;
+  box-shadow: 10px 50px 70px rgba(0, 0, 0, 0.25),
+              inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+              inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+              inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #2f363e;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    z-index: 100000;
+  }
+
+  span {
+    position: absolute;
+    inset: 20px;
+    color: #fff;
+    text-align: center;
+    transform: rotate(calc(30deg * var(--i)));
+
+    b {
+      font-size: 2em;
+      opacity: 0.25;
+      font-weight: 600;
+      display: inline-block;
+      transform: rotate(calc(-30deg * var(--i)));
+    }
+  }
+
+  .circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 10;
+
+    i {
+      position: absolute;
+      width: 6px;
+      height: 50%;
+      background: var(--clr);
+      opacity: 0.75;
+      transform-origin: bottom;
+      transform: scaleY(0.5);
+    }
+
+    &:nth-child(1) i {
+      width: 2px;
+    }
+
+    &:nth-child(2) i {
+      width: 6px;
+    }
+
+    &2 {
+      width: 240px;
+      height: 240px;
+      z-index: 9;
+    }
+
+    &3 {
+      width: 180px;
+      height: 180px;
+      z-index: 8;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -8.5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--clr);
+      box-shadow: 0 0 10px var(--clr),
+                  0 0 40px var(--clr);
+    }
+  }
+}
+
+/* Make Responsive */
+@media screen and (max-width: 768px) {
+  .container {
+    border-radius: 10px;
+  }
+
+  .clock {
+    width: 300px;
+    height: 300px;
+
+    span {
+      inset: 15px;
+
+      b {
+        font-size: 1.5em;
+      }
+    }
+
+    .circle {
+      width: 200px;
+      height: 200px;
+
+      i {
+        height: 40%;
+      }
+
+      &:nth-child(1) i {
+        width: 1px;
+      }
+
+      &:nth-child(2) i {
+        width: 3px;
+      }
+
+      &2 {
+        width: 150px;
+        height: 150px;
+      }
+
+      &3 {
+        width: 100px;
+        height: 100px;
+      }
+
+      &::before {
+        top: -6.5px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    border-radius: 0;
+  }
+
+  .clock {
+    width: 200px;
+    height: 200px;
+
+    span {
+      inset: 10px;
+
+      b {
+        font-size: 1em;
+      }
+    }
+
+    .circle {
+      width: 120px;
+      height: 120px;
+
+      i {
+        height: 30%;
+      }
+
+      &:nth-child(1) i {
+        width: 1px;
+      }
+
+      &:nth-child(2) i {
+        width: 2px;
+      }
+
+      &2 {
+        width: 80px;
+        height: 80px;
+      }
+
+      &3 {
+        width: 60px;
+        height: 60px;
+      }
+
+      &::before {
+        top: -4.5px;
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+}
+
+/* Keyframe Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

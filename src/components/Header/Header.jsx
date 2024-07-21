@@ -6,6 +6,9 @@ import {
   Offcanvas,
   Button,
   ButtonGroup,
+  Row,
+  Col,
+  Toast,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
@@ -16,19 +19,21 @@ import Skeleton from "@mui/material/Skeleton";
 import ListGroup from "react-bootstrap/ListGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPen } from "@fortawesome/free-solid-svg-icons";
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
-import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
+import CloseIcon from "@mui/icons-material/Close"; // Import CloseIcon
 import "./Header.scss";
 
 const Header = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState('system');
-  const [time, setTime] = useState('');
-  const [date, setDate] = useState('');
+  const [theme, setTheme] = useState("system");
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [is24HourFormat, setIs24HourFormat] = useState(false);
+  const [showToast, setShowToast] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,17 +44,25 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (theme === 'dark') {
+    const storedTheme = localStorage.getItem("theme") || "system";
+    setTheme(storedTheme);
+
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+    if (storedTheme === "system") {
+      setTheme(systemTheme);
+    } else {
+      setTheme(storedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
       document.body.classList.add("dark-mode");
     } else {
       document.body.classList.remove("dark-mode");
-    }
-  }, [theme]);
-
-  useEffect(() => {
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
-    if (theme === 'system') {
-      setTheme(systemTheme);
     }
   }, [theme]);
 
@@ -58,10 +71,15 @@ const Header = () => {
       const now = new Date();
       const hours = now.getHours();
       const minutes = now.getMinutes();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const formattedHours = hours % 12 || 12;
+      const seconds = now.getSeconds();
+
+      const formattedHours = is24HourFormat ? hours : hours % 12 || 12;
+      const ampm = is24HourFormat ? "" : hours >= 12 ? "PM" : "AM";
       const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-      const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
+      const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+      const timeString =
+        `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`.trim();
 
       const day = now.getDate();
       const month = now.getMonth() + 1; // Months are 0-based
@@ -73,10 +91,10 @@ const Header = () => {
     };
 
     updateTimeAndDate(); // Update immediately
-    const interval = setInterval(updateTimeAndDate, 60000); // Update every minute
+    const interval = setInterval(updateTimeAndDate, 1000); // Update every second
 
     return () => clearInterval(interval);
-  }, []);
+  }, [is24HourFormat]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -87,6 +105,7 @@ const Header = () => {
 
   const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
+    localStorage.setItem("theme", selectedTheme);
   };
 
   const handleKeyDown = (event, callback) => {
@@ -95,13 +114,27 @@ const Header = () => {
     }
   };
 
+  const handleToastResponse = (format) => {
+    setIs24HourFormat(format === "24");
+    localStorage.setItem("is24HourFormat", format);
+    setShowToast(false);
+  };
+
+  useEffect(() => {
+    const savedFormat = localStorage.getItem("is24HourFormat");
+    if (savedFormat) {
+      setIs24HourFormat(savedFormat === "24");
+      setShowToast(false);
+    }
+  }, []);
+
   return (
     <>
       <Navbar
         expand="lg"
         sticky="top"
         className={`cfh-navbar shadow ${
-          theme === 'dark' ? "navbar-dark" : "navbar-light"
+          theme === "dark" ? "navbar-dark" : "navbar-light"
         }`}
       >
         <Container fluid>
@@ -146,7 +179,7 @@ const Header = () => {
               <Navbar.Collapse id="navbarScroll">
                 <Nav className="ms-auto my-2 my-lg-0" navbarScroll>
                   <Nav.Link>
-                      <span>{time}</span>
+                    <span>{time}</span>
                   </Nav.Link>
                   <Nav.Link>
                     <span>{date}</span>
@@ -200,22 +233,22 @@ const Header = () => {
           <hr />
           <ButtonGroup aria-label="Theme selection" className="mb-3">
             <Button
-              variant={theme === 'light' ? 'primary' : 'outline-primary'}
-              onClick={() => handleThemeChange('light')}
+              variant={theme === "light" ? "primary" : "outline-primary"}
+              onClick={() => handleThemeChange("light")}
             >
               <LightModeIcon className="me-1" />
               Light
             </Button>
             <Button
-              variant={theme === 'system' ? 'primary' : 'outline-primary'}
-              onClick={() => handleThemeChange('system')}
+              variant={theme === "system" ? "primary" : "outline-primary"}
+              onClick={() => handleThemeChange("system")}
             >
               <SettingsBrightnessIcon className="me-1" />
               System
             </Button>
             <Button
-              variant={theme === 'dark' ? 'primary' : 'outline-primary'}
-              onClick={() => handleThemeChange('dark')}
+              variant={theme === "dark" ? "primary" : "outline-primary"}
+              onClick={() => handleThemeChange("dark")}
             >
               <DarkModeIcon className="me-1" />
               Dark
@@ -231,6 +264,42 @@ const Header = () => {
           </div>
         </Offcanvas.Body>
       </Offcanvas>
+
+      <Row>
+        <Col md={6} className="mb-2">
+          <Toast show={showToast} onClose={() => setShowToast(false)}>
+            <Toast.Header>
+              <img
+                src="/src/assets/images/CFHLogo.png"
+                className="rounded me-2"
+                alt="cfh-image"
+                height={20}
+              />
+              <strong className="me-auto">ChronoFusionHub</strong>
+              <small>Just now</small>
+            </Toast.Header>
+            <Toast.Body>
+              Do you want 24hrs format?
+              <div className="d-flex flex-row justify-content-end">
+                <Button
+                  variant="primary"
+                  className="m-1"
+                  onClick={() => handleToastResponse("24")}
+                >
+                  Yes
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="m-1"
+                  onClick={() => handleToastResponse("12")}
+                >
+                  No
+                </Button>
+              </div>
+            </Toast.Body>
+          </Toast>
+        </Col>
+      </Row>
     </>
   );
 };

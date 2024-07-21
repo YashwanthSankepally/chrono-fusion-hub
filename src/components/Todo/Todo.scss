@@ -1,0 +1,173 @@
+/* Ensure the section covers the full viewport height */
+.cfh-todo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f0f0f0; /* Light background color for contrast */
+  margin: 0;
+
+  .todo-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .todo-input {
+      display: flex;
+      width: 100%;
+      margin-bottom: 20px;
+
+      .MuiTextField-root {
+        flex: 1;
+        margin-right: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+
+    .todo-edit {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      .MuiTextField-root {
+        width: 100%;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #218838;
+        }
+      }
+    }
+
+    .todo-filters {
+      display: flex;
+      width: 100%;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .MuiTextField-root, .MuiSelect-root {
+        flex: 1;
+      }
+
+      .MuiFormControl-root {
+        flex: 1;
+        min-width: 120px; /* Ensures dropdowns don’t get too small */
+      }
+    }
+
+    .todo-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+
+      .todo-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        border-radius: 4px;
+        margin-bottom: 10px;
+
+        input[type="checkbox"] {
+          margin-right: 10px;
+        }
+
+        span {
+          flex: 1;
+        }
+
+        .todo-due-date {
+          margin-left: 10px;
+          font-size: 0.85em;
+          color: #6c757d;
+        }
+
+        button {
+          margin-left: 10px;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 0.9em; /* Slightly smaller font size for consistency */
+
+          &:first-of-type {
+            background-color: #007bff;
+            color: #fff;
+
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+
+          &:nth-of-type(2) {
+            background-color: #dc3545;
+            color: #fff;
+
+            &:hover {
+              background-color: #c82333;
+            }
+          }
+        }
+
+        &.completed {
+          span {
+            text-decoration: line-through;
+            color: #6c757d;
+          }
+        }
+      }
+    }
+
+    .MuiPagination-root {
+      margin-top: 20px;
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .todo-app {
+    padding: 10px;
+  }
+
+  .todo-input, .todo-edit, .todo-filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .todo-input .MuiTextField-root, .todo-edit .MuiTextField-root, .todo-filters .MuiFormControl-root {
+    margin-bottom: 10px;
+  }
+}

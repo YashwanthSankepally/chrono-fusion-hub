@@ -7,7 +7,9 @@ import Jobs from "./components/Jobs/Jobs";
 import JobDetail from "./components/Jobs/JobDetail/JobDetail";
 import Courses from "./components/Courses/Courses";
 import Shop from "./components/Shop/Shop";
-import PageNotFound from "./components/PageNotFound/PageNotFound"
+import PageNotFound from "./components/PageNotFound/PageNotFound";
+import CalendarApp from "./components/Calendar/Calendar";
+import TodoApp from "./components/Todo/Todo";
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
           <Route path="/jobs/job-detail" element={<JobDetail />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/cfh-shop" element={<Shop />} />
-          <Route path="/page-not-found" element={< PageNotFound/>} />
+          <Route path="/page-not-found" element={<PageNotFound />} />
+          <Route path="/calendar" element={<CalendarApp />} />
+          <Route path="/todo" element={<TodoApp />} />
         </Routes>
       </Router>
     </main>
