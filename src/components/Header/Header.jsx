@@ -6,8 +6,6 @@ import {
   Offcanvas,
   Button,
   ButtonGroup,
-  Row,
-  Col,
   Toast,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +20,7 @@ import { faUserPen } from "@fortawesome/free-solid-svg-icons";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
-import CloseIcon from "@mui/icons-material/Close"; // Import CloseIcon
+import CloseIcon from "@mui/icons-material/Close";
 import "./Header.scss";
 
 const Header = () => {
@@ -33,12 +31,12 @@ const Header = () => {
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   const [is24HourFormat, setIs24HourFormat] = useState(false);
-  const [showToast, setShowToast] = useState(true);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    });
+    }, 1000); // Just to simulate loading
 
     return () => clearTimeout(timer);
   }, []);
@@ -114,9 +112,14 @@ const Header = () => {
     }
   };
 
+  const handleTimeClick = () => {
+    setShowToast(true);
+  };
+
   const handleToastResponse = (format) => {
-    setIs24HourFormat(format === "24");
-    localStorage.setItem("is24HourFormat", format);
+    const is24Hour = format === "24";
+    setIs24HourFormat(is24Hour);
+    localStorage.setItem("is24HourFormat", is24Hour ? "24" : "12");
     setShowToast(false);
   };
 
@@ -124,7 +127,6 @@ const Header = () => {
     const savedFormat = localStorage.getItem("is24HourFormat");
     if (savedFormat) {
       setIs24HourFormat(savedFormat === "24");
-      setShowToast(false);
     }
   }, []);
 
@@ -179,7 +181,7 @@ const Header = () => {
               <Navbar.Collapse id="navbarScroll">
                 <Nav className="ms-auto my-2 my-lg-0" navbarScroll>
                   <Nav.Link>
-                    <span>{time}</span>
+                    <span onClick={handleTimeClick}>{time}</span>
                   </Nav.Link>
                   <Nav.Link>
                     <span>{date}</span>
@@ -265,41 +267,48 @@ const Header = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      <Row>
-        <Col md={6} className="mb-2">
-          <Toast show={showToast} onClose={() => setShowToast(false)}>
-            <Toast.Header>
-              <img
-                src="/src/assets/images/CFHLogo.png"
-                className="rounded me-2"
-                alt="cfh-image"
-                height={20}
-              />
-              <strong className="me-auto">ChronoFusionHub</strong>
-              <small>Just now</small>
-            </Toast.Header>
-            <Toast.Body>
-              Do you want 24hrs format?
-              <div className="d-flex flex-row justify-content-end">
-                <Button
-                  variant="primary"
-                  className="m-1"
-                  onClick={() => handleToastResponse("24")}
-                >
-                  Yes
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="m-1"
-                  onClick={() => handleToastResponse("12")}
-                >
-                  No
-                </Button>
-              </div>
-            </Toast.Body>
-          </Toast>
-        </Col>
-      </Row>
+      <div className="toast-container position-fixed top-0 end-0 p-3">
+        <Toast
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          className="d-inline-block m-1 mt-4"
+        >
+          <Toast.Header>
+            <img
+              src="/src/assets/images/CFHLogo.png"
+              className="rounded me-2"
+              alt="cfh-image"
+              height={20}
+            />
+            <strong className="me-auto">ChronoFusionHub</strong>
+          </Toast.Header>
+          <Toast.Body>
+            {is24HourFormat
+              ? "Do you want 12hrs format?"
+              : "Do you want 24hrs format?"}
+            <div className="d-flex flex-row justify-content-end cfh-toast-btns-container">
+              <Button
+                variant="primary"
+                className="m-1"
+                onClick={() =>
+                  handleToastResponse(is24HourFormat ? "12" : "24")
+                }
+              >
+                Yes
+              </Button>
+              <Button
+                variant="secondary"
+                className="m-1"
+                onClick={() =>
+                  handleToastResponse(is24HourFormat ? "12" : "24")
+                }
+              >
+                No
+              </Button>
+            </div>
+          </Toast.Body>
+        </Toast>
+      </div>
     </>
   );
 };

@@ -29,23 +29,32 @@
 		justify-content: center;
   
 		.cfh-card-container {
-		  margin: 5px;
-  
-		  .cfh-rbs-card {
-			.courses-info {
-			  display: -webkit-box;
-			  -webkit-line-clamp: 3; /* Number of lines to display before truncating */
-			  line-clamp: 3;
-			  -webkit-box-orient: vertical;
-			  overflow: hidden;
-			  text-overflow: ellipsis;
-			}
+			margin: 5px;
+
+			.cfh-rbs-card {
+				.cfh-card-title {
+					display: -webkit-box;
+					-webkit-line-clamp: 1; /* Number of lines to display before truncating */
+					line-clamp: 1;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+
+				.courses-info {
+					display: -webkit-box;
+					-webkit-line-clamp: 3; /* Number of lines to display before truncating */
+					line-clamp: 3;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
   
 			.cfh-hover-icons {
 			  display: none !important; /* Hide icons initially */
 			}
   
-			&:hover .cfh-hover-icons {
+			&:hover .cfh-hover-icons, &:focus-within .cfh-hover-icons {
 			  display: flex !important; /* Show icons on hover */
 			}
 		  }

@@ -284,11 +284,11 @@ const Jobs = () => {
                       tabIndex={0}
                     >
                       <Card.Body>
-                        <Card.Title>{job.role}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">
+                        <Card.Title tabIndex={0}>{job.role}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted" tabIndex={0}>
                           {job.companyName}
                         </Card.Subtitle>
-                        <Card.Text className="cfh-about-job">
+                        <Card.Text className="cfh-about-job" tabIndex={0}>
                           {job.aboutRole}
                         </Card.Text>
                         <div className="d-flex cfh-buttons-container">

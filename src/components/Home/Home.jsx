@@ -9,6 +9,8 @@ import clockAndCalendarMP4 from "../../assets/animatedImages/calendarClockAnimat
 import weatherVideoGif from "../../assets/animatedImages/weather.gif";
 import RecipeImage from "../../assets/apps-images/recipe.bg.png";
 import NewsAnimation from "../../assets/animatedImages/NewsAnimation.gif";
+import CodeEditorLogo from "../../assets/apps-images/codeEditorPc-removebg-preview.png";
+import ChronoStream from "../../assets/apps-images/CFH-VideoThumbnail.png";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -33,7 +35,7 @@ const Home = () => {
       CardImage: todoThumbnail,
     },
     {
-      cardTitle: "Clock & Calendar",
+      cardTitle: "Clock&Calendar",
       CardImage: clockAndCalendarMP4,
     },
     {
@@ -47,6 +49,14 @@ const Home = () => {
     {
       cardTitle: "News",
       CardImage: NewsAnimation,
+    },
+    {
+      cardTitle: "Code Editor",
+      CardImage: CodeEditorLogo,
+    },
+    {
+      cardTitle: "ChronoStream",
+      CardImage: ChronoStream,
     },
   ];
 

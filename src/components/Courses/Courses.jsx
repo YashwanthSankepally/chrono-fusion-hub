@@ -218,15 +218,22 @@ const Courses = () => {
                 ))
               : filteredCourses.map((course) => (
                   <div className="cfh-card-container" key={course._id}>
-                    <Card style={{ width: "18rem" }} className="cfh-rbs-card">
+                    <Card
+                      style={{ width: "18rem" }}
+                      className="cfh-rbs-card"
+                      tabIndex={0}
+                    >
                       <Card.Img
                         variant="top"
                         src={course.thumbnailUrl}
                         alt={course.courseTitle}
+                        tabIndex={0}
                       />
-                      <Card.Body>
-                        <Card.Title>{course.courseTitle}</Card.Title>
-                        <Card.Text className="courses-info">
+                      <Card.Body className="cfh-card-body">
+                        <Card.Title className="cfh-card-title" tabIndex={0}>
+                          {course.courseTitle}
+                        </Card.Title>
+                        <Card.Text className="courses-info" tabIndex={0}>
                           {course.info}
                         </Card.Text>
                         <div className="d-flex justify-content-between">
@@ -249,7 +256,10 @@ const Courses = () => {
                               }
                             >
                               {favorites.includes(course._id) ? (
-                                <StarIcon style={{ color: "#fdd835" }} className="cfh-favorite-star-icon" />
+                                <StarIcon
+                                  style={{ color: "#fdd835" }}
+                                  className="cfh-favorite-star-icon"
+                                />
                               ) : (
                                 <StarBorderIcon />
                               )}
